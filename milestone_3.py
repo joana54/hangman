@@ -1,10 +1,4 @@
 import random
-word_list = ["mango", "pineapple", "kiwi", "strawberries", "quince"]
-print(word_list)
-
-word = random.choice(word_list)
-print(word)
-
 
 def check_guess(guess):
     guess = guess.lower()
@@ -24,4 +18,12 @@ def ask_for_input():
             print("Invalid letter. Please, enter a single alphabetical character.")
     check_guess(guess)
 
-ask_for_input()
+
+
+if __name__ == "__main__":
+    word_list = ["mango", "pineapple", "kiwi", "strawberries", "quince"]
+    print(word_list)
+
+    word = random.choice(word_list)
+    print(word)
+    ask_for_input()
