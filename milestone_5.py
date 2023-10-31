@@ -9,8 +9,8 @@ class Hangman:
         self.list_of_guesses = []
 
     def __check_guess(self, guess):
-        """This function takes in a guess argument and checks if it's in the self.word. Else it reduces number of lives
-        and prints how many lives are left.""" 
+        """This function takes in a guess argument and checks if it's in the self.word. 
+        Else it reduces number of lives and prints how many lives are left.""" 
         guess = guess.lower()
         if guess in self.word:
             print(f"Good guess! {guess} is in the word.")
@@ -24,8 +24,9 @@ class Hangman:
             print(f"You have {self.num_lives} lives left.")
 
     def __ask_for_input(self):
-        """This function asks for an input from the user and checks whether the input is one alphabetical letter. Also checks
-        has already been made. Returns the guess if valid."""
+        """This function asks for an input from the user and checks whether the input is one alphabetical letter. 
+        Also checks has already been made. 
+        Returns the guess if valid."""
         while True:
             guess = input("Please enter one letter:")
             if len(guess) != 1 or guess.isalpha() != True:
@@ -37,6 +38,8 @@ class Hangman:
     
 
     def make_guess(self):
+        """This function calls the __ask_for_input and __check_guess functions.
+        It also appends the guess to self.list_of_guesses"""
         print(self.word_guessed)
         guess = Hangman.__ask_for_input(self)
         Hangman.__check_guess(self, guess)
@@ -44,11 +47,13 @@ class Hangman:
 
 
 def play_game(word_list):
+    """This function runs the game and ends it if you run out of lives or win."""
     num_lives = 5
     game = Hangman(word_list, num_lives)
     while True:
         if num_lives == 0:
             print("You lost!")
+            break
         elif game.num_letters > 0:
             game.make_guess()  
         else:
