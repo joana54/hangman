@@ -8,7 +8,9 @@ class Hangman:
         self.word_list = word_list
         self.list_of_guesses = []
 
-    def check_guess(self, guess):
+    def __check_guess(self, guess):
+        """This function takes in a guess argument and checks if it's in the self.word. Else it reduces number of lives
+        and prints how many lives are left.""" 
         guess = guess.lower()
         if guess in self.word:
             print(f"Good guess! {guess} is in the word.")
@@ -21,23 +23,33 @@ class Hangman:
             print(f"Sorry, {guess} is not in the word.")
             print(f"You have {self.num_lives} lives left.")
 
-    def ask_for_input(self):
-        while self.num_lives > 0:
+    def __ask_for_input(self):
+        """This function asks for an input from the user and checks whether the input is one alphabetical letter. Also checks
+        has already been made. Returns the guess if valid."""
+        while True:
             guess = input("Please enter one letter:")
             if len(guess) != 1 or guess.isalpha() != True:
                 print("Invalid letter. Please, enter a single alphabetical character.")
             elif guess in self.list_of_guesses:
                 print("You already tried that letter!")
             else:
-                Hangman.check_guess(self, guess)
-                self.list_of_guesses.append(guess)
+                return guess
+
+    def game(self):
+        """This function runs while there are more than 0 lices left. It calls the check_guess() function and appends the guess
+        to self.list_of_guesses."""
+        while self.num_lives > 0:
+            guess = Hangman.__ask_for_input(self)
+            Hangman.__check_guess(self, guess)
+            self.list_of_guesses.append(guess)
+
     
 
 if __name__ == "__main__":
 
     hangman = Hangman(["mango", "pineapple", "kiwi", "strawberries", "quince"])
 
-    hangman.ask_for_input()
+    hangman.game()
 
    
 
